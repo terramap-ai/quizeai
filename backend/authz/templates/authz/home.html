@@ -1,0 +1,101 @@
+{% extends 'authz/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-header">
+        <h2>Welcome to the Dashboard</h2>
+    </div>
+    
+    <div id="user-info" class="mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>User Profile</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> <span id="profile-username"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-grid gap-2">
+        <button id="logout-btn" class="btn btn-danger">Logout</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Check if user is logged in
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+            window.location.href = "{% url 'login_page' %}";
+            return;
+        }
+        
+        // Fetch user profile
+        $.ajax({
+            url: '/api/auth/profile/',
+            type: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+                $('#profile-username').text(response.username);
+                $('#profile-email').text(response.email);
+                $('#profile-name').text(
+                    (response.first_name || '') + ' ' + (response.last_name || '')
+                );
+            },
+            error: function(xhr) {
+                if (xhr.status === 401) {
+                    // Token expired, try to refresh
+                    refreshToken();
+                } else {
+                    // Redirect to login page
+                    localStorage.clear();
+                    window.location.href = "{% url 'login_page' %}";
+                }
+            }
+        });
+        
+        // Logout button handler
+        $('#logout-btn').on('click', function() {
+            localStorage.clear();
+            window.location.href = "{% url 'login_page' %}";
+        });
+        
+        // Function to refresh token
+        function refreshToken() {
+            const refreshToken = localStorage.getItem('refresh_token');
+            
+            if (!refreshToken) {
+                localStorage.clear();
+                window.location.href = "{% url 'login_page' %}";
+                return;
+            }
+            
+            $.ajax({
+                url: '/api/auth/token/refresh/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    refresh: refreshToken
+                }),
+                success: function(response) {
+                    localStorage.setItem('access_token', response.access);
+                    window.location.reload();
+                },
+                error: function() {
+                    localStorage.clear();
+                    window.location.href = "{% url 'login_page' %}";
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

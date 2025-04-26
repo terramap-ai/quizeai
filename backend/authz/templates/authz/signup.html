@@ -1,0 +1,123 @@
+{% extends 'authz/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-header">
+        <h2>Sign Up</h2>
+    </div>
+    
+    <div id="alert-container"></div>
+    
+    <form id="signup-form">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </form>
+    
+    <div class="mt-3 text-center">
+        <p>Already have an account? <a href="{% url 'login_page' %}">Login</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('#signup-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                username: $('#username').val(),
+                email: $('#email').val(),
+                first_name: $('#first_name').val(),
+                last_name: $('#last_name').val(),
+                password: $('#password').val(),
+                password2: $('#password2').val()
+            };
+            
+            // Client-side validation
+            if (formData.password !== formData.password2) {
+                $('#alert-container').html(
+                    '<div class="alert alert-danger" role="alert">' +
+                    'Passwords do not match!' +
+                    '</div>'
+                );
+                return;
+            }
+            
+            $.ajax({
+                url: '/api/auth/register/',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    // Store tokens in localStorage
+                    localStorage.setItem('access_token', response.tokens.access);
+                    localStorage.setItem('refresh_token', response.tokens.refresh);
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                    
+                    // Show success message
+                    $('#alert-container').html(
+                        '<div class="alert alert-success" role="alert">' +
+                        'Registration successful! Redirecting to home page...' +
+                        '</div>'
+                    );
+                    
+                    // Redirect to home page after a short delay
+                    setTimeout(function() {
+                        window.location.href = "{% url 'home_page' %}";
+                    }, 1500);
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Registration failed. Please try again.';
+                    
+                    if (xhr.responseJSON) {
+                        const errors = xhr.responseJSON;
+                        errorMessage = '';
+                        
+                        for (const field in errors) {
+                            if (Array.isArray(errors[field])) {
+                                errorMessage += `<strong>${field}:</strong> ${errors[field].join(', ')}<br>`;
+                            } else {
+                                errorMessage += `<strong>${field}:</strong> ${errors[field]}<br>`;
+                            }
+                        }
+                    }
+                    
+                    $('#alert-container').html(
+                        '<div class="alert alert-danger" role="alert">' +
+                        errorMessage +
+                        '</div>'
+                    );
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
