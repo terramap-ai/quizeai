@@ -170,7 +170,7 @@ export const fetchCategoryQuizQuestions = async (
 ): Promise<QuizQuestion[]> => {
   try {
     const response = await apiClient.get(
-      `/news/newsqa/?category=${categoryId}`
+      `/news/newsqa/?category=${categoryId}&format=json`
     );
 
     // Check if the response is valid JSON with expected structure
