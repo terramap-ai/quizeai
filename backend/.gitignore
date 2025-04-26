@@ -77,8 +77,3 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
-
-# Database #
-db.sqlite3
-db.sqlite3-journal
-
