@@ -156,6 +156,9 @@ const CategorySelection = () => {
 
         <div className="relative z-10">
           <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
+              AI
+            </span>
             <span className="mr-2">Quiz</span>
             <span className="bg-gradient-to-r from-indigo-600 to-purple-600 text-transparent bg-clip-text">
               Master
@@ -164,8 +167,9 @@ const CategorySelection = () => {
           </h1>
 
           <p className="text-gray-600 max-w-md mx-auto">
-            Expand your knowledge with AI-powered quizzes based on the latest news and trends.
-            Our system analyzes current events to create fresh, relevant questions daily.
+            Expand your knowledge with AI-powered quizzes based on the latest
+            news and trends. Our system analyzes current events to create fresh,
+            relevant questions daily.
           </p>
 
           {/* Preferences button */}
@@ -225,10 +229,16 @@ const CategorySelection = () => {
               onClick={() => navigate("/quiz/mix")}
               className="mt-2 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
             >
-              <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                className="w-4 h-4 mr-2"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path d="M12 16l4-4m0 0l-4-4m4 4H8m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Try AI-Curated Daily Quiz
+              AI-Curated Daily Quiz
             </button>
           </div>
         </div>
@@ -241,7 +251,8 @@ const CategorySelection = () => {
           <h2 className="text-xl font-bold text-gray-800">Browse Categories</h2>
         </div>
         <p className="text-gray-600 pl-4">
-          Explore AI-powered quizzes by category. Each quiz contains questions generated from the latest news and developments in that field.
+          Explore AI-powered quizzes by category. Each quiz contains questions
+          generated from the latest news and developments in that field.
         </p>
       </div>
 
@@ -256,7 +267,7 @@ const CategorySelection = () => {
             }}
           >
             {category.id === "mix" ? (
-              <Card 
+              <Card
                 className="h-full overflow-hidden border-2 border-indigo-200 hover:border-indigo-400 hover:shadow-lg transition-all bg-gradient-to-br from-white to-indigo-50"
                 onClick={() => handleCategorySelect(category.id)}
               >
@@ -305,10 +316,18 @@ const CategorySelection = () => {
                       </p>
 
                       <div className="flex items-center mb-3 bg-blue-50 p-2 rounded-md">
-                        <svg className="w-4 h-4 text-blue-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg
+                          className="w-4 h-4 text-blue-500 mr-2"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
                           <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span className="text-xs text-blue-700">Updated with fresh questions daily</span>
+                        <span className="text-xs text-blue-700">
+                          Updated with fresh questions daily
+                        </span>
                       </div>
 
                       <button
@@ -346,16 +365,30 @@ const CategorySelection = () => {
                     {category.icon}
                   </div>
                   <TypographyH3 className="mb-2">{category.name}</TypographyH3>
-                  <p className="text-gray-500 mb-4 flex-grow">{category.description}</p>
-                  
+                  <p className="text-gray-500 mb-4 flex-grow">
+                    {category.description}
+                  </p>
+
                   {/* AI Badge */}
                   <div className="flex items-center mb-4 bg-gray-50 p-2 rounded-md">
-                    <svg className="w-3.5 h-3.5 text-gray-600 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    <svg
+                      className="w-3.5 h-3.5 text-gray-600 mr-1.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                      />
                     </svg>
-                    <span className="text-xs text-gray-700">AI-curated current topics</span>
+                    <span className="text-xs text-gray-700">
+                      AI-curated current topics
+                    </span>
                   </div>
-                  
+
                   <Button
                     variant="default"
                     size="sm"
