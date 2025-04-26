@@ -17,7 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Get PORT from environment variable or use default
-PORT = int(os.environ.get('PORT', 8000))
+PORT = int(os.environ.get('PORT', 10000))
 
 
 # Quick-start development settings - unsuitable for production
