@@ -1,0 +1,138 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "News & Politics",
+      "subcategories": [
+        "International Relations",
+        "Domestic Politics",
+        "Government Policies",
+        "Elections & Political Movements",
+        "Diplomacy & International Organizations"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Business & Economy",
+      "subcategories": [
+        "Stock Markets & Investments",
+        "Corporate News",
+        "Startups & Entrepreneurship",
+        "Economic Indicators",
+        "Banking & Finance",
+        "Trade & Commerce"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Technology",
+      "subcategories": [
+        "AI & Machine Learning",
+        "Consumer Tech",
+        "Cybersecurity",
+        "Social Media Platforms",
+        "Space Exploration",
+        "Emerging Technologies"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Science",
+      "subcategories": [
+        "Medical Breakthroughs",
+        "Environmental Science",
+        "Physics & Astronomy",
+        "Biotechnology",
+        "Research Developments"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Health & Wellness",
+      "subcategories": [
+        "Medical News",
+        "Public Health Initiatives",
+        "Nutrition & Diet Trends",
+        "Mental Health",
+        "Disease Prevention"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Environment & Climate",
+      "subcategories": [
+        "Climate Change News",
+        "Conservation Efforts",
+        "Sustainable Development",
+        "Natural Disasters",
+        "Renewable Energy"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Sports",
+      "subcategories": [
+        "Major Sporting Events",
+        "Sports Personalities",
+        "Team Sports",
+        "Olympic News",
+        "Esports"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Entertainment",
+      "subcategories": [
+        "Film & Television",
+        "Music Industry",
+        "Celebrity News",
+        "Streaming Services",
+        "Awards & Festivals"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Arts & Culture",
+      "subcategories": [
+        "Visual Arts",
+        "Literature & Publishing",
+        "Theater & Performance",
+        "Cultural Heritage",
+        "Museums & Exhibitions"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Education",
+      "subcategories": [
+        "Educational Policies",
+        "Academic Research",
+        "University Rankings",
+        "Learning Innovations",
+        "Student Affairs"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Law & Justice",
+      "subcategories": [
+        "Supreme Court Decisions",
+        "Landmark Legal Cases",
+        "Legal Reforms",
+        "Criminal Justice",
+        "International Law"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Social Issues",
+      "subcategories": [
+        "Human Rights",
+        "Gender Equality",
+        "Racial Justice",
+        "Poverty & Economic Inequality",
+        "Immigration & Refugee Affairs"
+      ]
+    }
+  ]
+}
