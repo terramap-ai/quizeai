@@ -3,16 +3,18 @@ import {
   Routes,
   Route,
   Navigate,
+  useParams,
 } from "react-router-dom";
+import QuizApp from "./QuizNew";
 import ElegantQuizApp from "./Quiz";
 import CategorySelection from "./CategorySelection";
 import CategoryPreferenceSelection from "./Screens/CategoryPreferenceSelection";
 
 function App() {
   // Check if preferences exist and determine initial redirect
-  const hasPreferences = localStorage.getItem('quizPreferences') !== null;
-  const initialRedirect = hasPreferences ? '/quiz/mix' : '/categories';
-  
+  const hasPreferences = localStorage.getItem("quizPreferences") !== null;
+  const initialRedirect = hasPreferences ? "/quiz/mix" : "/categories";
+
   return (
     <Router>
       <Routes>
@@ -25,13 +27,10 @@ function App() {
   );
 }
 
-// This wrapper component gets the category from URL params and passes it to the quiz
+// This wrapper component handles the quiz route
 function QuizWrapper() {
-  const { category } = useParams();
-  return <ElegantQuizApp category={category} />;
+  // The parameters are now handled directly in the QuizApp component
+  return <QuizApp />;
 }
-
-// Import useParams at the top level to avoid hoisting issues
-import { useParams } from "react-router-dom";
 
 export default App;
