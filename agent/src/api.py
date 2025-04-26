@@ -29,7 +29,9 @@ app = FastAPI(
 )
 
 # Mount static files directory
-app.mount("/static", StaticFiles(directory="static"), name="static")
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+os.makedirs(static_dir, exist_ok=True)
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 # Initialize our news processor agent
 news_processor = NewsProcessor(api_key=api_key)
