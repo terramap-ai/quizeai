@@ -43,7 +43,13 @@ const CardFooter = ({ className, children }: CardFooterProps) => (
 );
 
 interface ButtonProps {
-  variant?: "primary" | "outline" | "ghost" | "destructive" | "success" | "default";
+  variant?:
+    | "primary"
+    | "outline"
+    | "ghost"
+    | "destructive"
+    | "success"
+    | "default";
   size?: "sm" | "lg" | "default";
   className?: string;
   children: React.ReactNode;
@@ -233,7 +239,7 @@ document.head.appendChild(style);
 
 const ElegantQuizApp = ({ category = "general" }) => {
   const navigate = useNavigate();
-  
+
   // State
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   type Answer = {
@@ -251,7 +257,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [mascotMood, setMascotMood] = useState("neutral");
-  const [mascotMessage, setMascotMessage] = useState("");
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
@@ -524,7 +529,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
     // Update mascot mood and message
     if (isCorrect) {
       setMascotMood("happy");
-      setMascotMessage(getRandomEncouragement());
       setScore((prev) => prev + currentQuestion.points);
       setStreak((prev) => prev + 1);
 
@@ -534,9 +538,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
       }, 1500);
     } else {
       setMascotMood("sad");
-      setMascotMessage(
-        currentQuestion.explanation || "Not quite. Let's learn from this!"
-      );
       setStreak(0);
       // Incorrect answers require user to acknowledge with "Got it" button
     }
@@ -551,7 +552,7 @@ const ElegantQuizApp = ({ category = "general" }) => {
     if (isAnimating || showFeedback) return;
 
     const form = e.target as HTMLFormElement;
-    const answerInput = form.elements.namedItem('answer') as HTMLInputElement;
+    const answerInput = form.elements.namedItem("answer") as HTMLInputElement;
     const answer = answerInput.value.trim();
     const currentQuestion = questions[currentCardIndex];
 
@@ -582,7 +583,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
     // Update mascot mood and message
     if (isCorrect) {
       setMascotMood("happy");
-      setMascotMessage(getRandomEncouragement());
       setScore((prev) => prev + currentQuestion.points);
       setStreak((prev) => prev + 1);
 
@@ -592,10 +592,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
       }, 1500);
     } else {
       setMascotMood("sad");
-      setMascotMessage(
-        currentQuestion.explanation ||
-          `The correct answer was "${currentQuestion.correctAnswer}".`
-      );
       setStreak(0);
       // Incorrect answers require user to acknowledge with "Got it" button
     }
@@ -621,7 +617,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
     }));
 
     setMascotMood("neutral");
-    setMascotMessage("No problem. We'll come back to this one later!");
     setStreak(0);
 
     moveToNextCard();
@@ -630,12 +625,12 @@ const ElegantQuizApp = ({ category = "general" }) => {
   // Restart the quiz
   const handleRestartQuiz = () => {
     // Instead of resetting everything, redirect to categories page
-    navigate('/categories');
+    navigate("/categories");
   };
-  
+
   // Go to home
   const handleGoHome = () => {
-    navigate('/categories');
+    navigate("/categories");
   };
 
   // Handle moving to the next card with animation
@@ -656,13 +651,11 @@ const ElegantQuizApp = ({ category = "general" }) => {
         }
         // Reset mascot state when moving to the next question
         setMascotMood("neutral");
-        setMascotMessage("");
       } else {
         // Quiz completed
         setQuizCompleted(true);
         setShowConfetti(true);
         setMascotMood("happy");
-        setMascotMessage("Congratulations on completing the quiz!");
 
         // Hide confetti after a few seconds
         setTimeout(() => {
@@ -749,14 +742,6 @@ const ElegantQuizApp = ({ category = "general" }) => {
         <div className={`transition-all duration-300 ${mascotAnimationClass}`}>
           {mascotSvg}
         </div>
-
-        {/* Speech bubble */}
-        {mascotMessage && (
-          <div className="absolute top-0 left-28 bg-white rounded-xl p-4 shadow-md min-w-[200px] max-w-[280px] animate-slide-in z-10 transform -translate-y-1/4">
-            <div className="absolute -left-2 top-1/3 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-white border-b-8 border-b-transparent"></div>
-            <p className="text-sm font-medium text-gray-800">{mascotMessage}</p>
-          </div>
-        )}
       </div>
     );
   };
@@ -892,7 +877,13 @@ const ElegantQuizApp = ({ category = "general" }) => {
             <div className="space-y-2 w-full">
               {question.options?.map((option: string, index: number) => {
                 // Determine button styling based on feedback state
-                let buttonVariant: "primary" | "outline" | "ghost" | "destructive" | "success" | "default" = "outline";
+                let buttonVariant:
+                  | "primary"
+                  | "outline"
+                  | "ghost"
+                  | "destructive"
+                  | "success"
+                  | "default" = "outline";
                 let isDisabled = false;
 
                 if (showFeedback) {
@@ -938,14 +929,26 @@ const ElegantQuizApp = ({ category = "general" }) => {
             {showFeedback && !isCorrectAnswer && (
               <div className="mt-4 p-4 bg-gradient-to-r from-red-50 to-white rounded-lg border-l-4 border-red-400 animate-fade-in shadow-sm">
                 <div className="flex items-start">
-                  <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-red-500 mr-2 mt-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-sm font-medium text-gray-900 mb-1">
                       Explanation:
                     </p>
-                    <p className="text-sm text-gray-700">{question.explanation}</p>
+                    <p className="text-sm text-gray-700">
+                      {question.explanation}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -953,9 +956,23 @@ const ElegantQuizApp = ({ category = "general" }) => {
 
             {/* "Got it" button shown only for incorrect answers */}
             {showFeedback && !isCorrectAnswer ? (
-              <Button variant="primary" className="mt-4 w-full flex items-center justify-center" onClick={handleGotIt}>
-                <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <Button
+                variant="primary"
+                className="mt-4 w-full flex items-center justify-center"
+                onClick={handleGotIt}
+              >
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
                 Got it
               </Button>
@@ -985,12 +1002,25 @@ const ElegantQuizApp = ({ category = "general" }) => {
               {showFeedback && !isCorrectAnswer && (
                 <div className="mt-4 mb-4 p-4 bg-gradient-to-r from-red-50 to-white rounded-lg border-l-4 border-red-400 animate-fade-in shadow-sm">
                   <div className="flex items-start">
-                    <svg className="w-5 h-5 text-red-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="w-5 h-5 text-red-500 mr-2 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <div>
                       <p className="text-sm font-medium text-gray-900 mb-1">
-                        Correct answer: <span className="text-green-600">{question.correctAnswer}</span>
+                        Correct answer:{" "}
+                        <span className="text-green-600">
+                          {question.correctAnswer}
+                        </span>
                       </p>
                       <p className="text-sm text-gray-700 mt-2">
                         {question.explanation}
@@ -1008,16 +1038,40 @@ const ElegantQuizApp = ({ category = "general" }) => {
                   className="w-full mt-4 flex items-center justify-center"
                   onClick={handleGotIt}
                 >
-                  <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                   Got it
                 </Button>
               ) : !showFeedback ? (
                 <div className="flex space-x-2">
-                  <Button variant="primary" type="submit" className="flex-1 flex items-center justify-center">
-                    <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="flex-1 flex items-center justify-center"
+                  >
+                    <svg
+                      className="w-4 h-4 mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     Submit
                   </Button>
@@ -1086,8 +1140,8 @@ const ElegantQuizApp = ({ category = "general" }) => {
       {/* Show confetti on quiz completion */}
       {showConfetti && renderConfetti()}
 
-      {/* Mascot */}
-      <div className="mb-6">{renderMascot()}</div>
+      {/* Mascot - smaller and without speech bubble */}
+      <div className="mb-4">{renderMascot()}</div>
 
       {/* Main content - either quiz card or results */}
       {!quizCompleted ? (
@@ -1096,7 +1150,9 @@ const ElegantQuizApp = ({ category = "general" }) => {
             isAnimating ? "opacity-0" : "opacity-100"
           } transition-opacity duration-300`}
         >
-          <CardContent className="pt-6 relative overflow-hidden">{renderQuestion()}</CardContent>
+          <CardContent className="pt-6 relative overflow-hidden">
+            {renderQuestion()}
+          </CardContent>
         </Card>
       ) : (
         renderResults()
