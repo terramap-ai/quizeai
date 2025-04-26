@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  "https://quizeai-be.onrender.com/api/news/newsqa/all/?format=json";
+  "https://quizeai-be.onrender.com/api";
 const CSRF_TOKEN =
   "GU4r3YgzbQpbWFcq2hcuo3da0vDbsnTqZ9KScPXD2Mrs1iueye6fLwuFUjkS8vmD";
 
@@ -148,7 +148,7 @@ const isValidJsonResponse = (data: any): boolean => {
 
 export const fetchQuizQuestions = async (): Promise<QuizQuestion[]> => {
   try {
-    const response = await apiClient.get("/news/newsqa/");
+    const response = await apiClient.get("/news/newsqa/?format=json");
 
     // Check if the response is valid JSON with expected structure
     if (isValidJsonResponse(response.data)) {
@@ -199,7 +199,7 @@ export const fetchMixQuizQuestions = async (
   limit: number = 10
 ): Promise<QuizQuestion[]> => {
   try {
-    const response = await apiClient.get(`/news/newsqa/?limit=${limit}`);
+    const response = await apiClient.get(`/news/newsqa/?limit=${limit}&format=json`);
 
     // Check if the response is valid JSON with expected structure
     if (isValidJsonResponse(response.data)) {
