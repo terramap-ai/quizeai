@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  "https://7474-103-163-65-38.ngrok-free.app/api/news/newsqa/all/?format=json";
+  "https://quizeai-be.onrender.com/api/news/newsqa/all/?format=json";
 const CSRF_TOKEN =
   "GU4r3YgzbQpbWFcq2hcuo3da0vDbsnTqZ9KScPXD2Mrs1iueye6fLwuFUjkS8vmD";
 
